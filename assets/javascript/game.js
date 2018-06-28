@@ -21,66 +21,101 @@
       // ==============================================================================
   
       // Function to render questions.
-      function renderQuestion() {
-        // If there are still more questions, render the next one.
-        if (questionIndex <= (questions.length - 1)) {
-          document.querySelector("#question").innerHTML = questions[questionIndex].q;
-        }
-        // If there aren't, render the end game screen.
-        else {
-          document.querySelector("#question").innerHTML = "Game Over!";
-          document.querySelector("#score").innerHTML = "Final Score: " + score + " out of " + questions.length;
-        }
+
+      var game = 
+      {
+          playerWins: 0,
+          guesses: 10,
+
+          notCorrect: function() {
+            this.guesses--;
+            console.log("not correct");
+          },
+
+
+          //document.getElementById("p1").innerHTML = "New text!";
+
+    }
+
+    var snake =
+    {
+      name: "snake",
+      nameArray: ["s","n","a","k","e"],
+      length: 5,
+    }
+
+    var peach =
+    {
+      name: "peach",
+      nameArray: ["p","e","a","c","h"],
+      length: 5,
+    }
+
+    var kirby =
+    {
+      name: "kirby",
+      nameArray: ["k","i","r","b","y"],
+      length: 5,
+    }
+
+    var mario =
+    {
+      name: "mario",
+      nameArray: ["m","a","r","i","o"],
+      length: 5,
+    }
+
+  
+      var characterArray = [snake,peach,kirby,mario];
+      var character = Math.floor(Math.random() * 4);      // returns a random integer from 0 to 3
+
+      var guessArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
+      var length = 4;
+
+
+      var pos = 0;
+
+      var answerArraySet = ["answer1", "answer2","answer3","answer4","answer5"];
+
+
+      for (s=0; s<characterArray[character].length; s++)
+      {
+        g = document.createElement('p');
+        g.setAttribute("id", answerArraySet[s]);
+        g.innerHTML="-";
+        document.getElementById("guesses").appendChild(g); 
+
       }
-  
-      // Function that updates the score...
-      function updateScore() {
-        document.querySelector("#score").innerHTML = "Score: " + score;
-      }
-  
-  
-      // MAIN PROCESS
-      // ==============================================================================
-  
-      // Calling functions to start the game.
-      renderQuestion();
-      updateScore();
-  
-      // When the user presses a key, it will run the following function...
-
-
-
-
 
 
       document.onkeyup = function(event) {
-  
-        // If there are no more questions, stop the function.
-        if (questionIndex === questions.length) {
-          return;
-        }
-  
+        var setArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
+        
+
+
+
+
+
         // Determine which key was pressed, make it lowercase, and set it to the userInput variable.
+
         var userInput = event.key.toLowerCase();
-  
-        // Only run this code if "t" or "f" were pressed.
-        if (userInput === "t" || userInput === "f") {
-  
-          // If they guess the correct answer, increase and update score, alert them they got it right.
-          if (userInput === questions[questionIndex].a) {
-            alert("Correct!");
-            score++;
-            updateScore();
+        guessArray[pos] = userInput;
+        document.getElementById(setArray[pos]).innerHTML = userInput;
+
+        for(j=0; j<characterArray[character].length;j++)
+        {
+          if(userInput==characterArray[character].nameArray[j])
+          {
+            document.getElementById(answerArraySet[j]).innerHTML = userInput;
           }
-          // If wrong, alert them they are wrong.
-          else {
-            alert("Wrong!");
-          }
-  
-          // Increment the questionIndex variable and call the renderQuestion function.
-          questionIndex++;
-          renderQuestion();
-  
         }
+        pos++;
+        
+
+        
+        
+
+      
+
   
       };
