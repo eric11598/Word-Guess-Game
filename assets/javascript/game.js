@@ -113,6 +113,39 @@
         
       }
 
+        function reset(){
+
+        
+        console.log("RESET");
+        guessArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
+        setArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
+        pos = 0;
+        character = Math.floor(Math.random() * 4);
+        document.getElementById("character").innerHTML = characterArray[character].name;
+
+        var temp = document.getElementById("guesses");
+
+        for (i =0 ; i <guessArray.length; i++)
+          document.getElementById(guessArray[i]).innerHTML = "_";
+
+        while (temp.hasChildNodes()) {  
+          temp.removeChild(temp.firstChild);
+      } 
+        
+          
+      for (s=0; s<characterArray[character].length; s++)
+      {
+        g = document.createElement('p');
+        g.setAttribute("id", answerArraySet[s]);
+        g.setAttribute("style", "display: inline;"); 
+        g.innerHTML="-";
+        document.getElementById("guesses").appendChild(g); 
+
+      }
+
+        }
+
+
      
 
       
@@ -136,7 +169,6 @@
 
           for(j=0; j<characterArray[character].length;j++)
           {
-
             if(userInput==characterArray[character].nameArray[j])
             {
               document.getElementById(answerArraySet[j]).innerHTML = userInput;
@@ -147,7 +179,12 @@
 
 
           if (checkWin(characterArray[character].length))
-            console.log("win");
+            {
+              console.log("WIN");
+              playerWins++;
+              reset();
+              
+            }
 
 
         document.getElementById("wins").innerHTML = playerWins;
