@@ -9,6 +9,49 @@
            image: "assets/images/snake.jpg",
            imageSilhouette: "assets/images/snakeSil.jpg",
          }
+         var link =
+         {
+           name: "link",
+           nameArray: ["l","i","n","k"],
+           length: 4,
+           image: "assets/images/link.jpg",
+           imageSilhouette: "assets/images/linkSil.jpg",
+         }
+         var luigi =
+         {
+           name: "luigi",
+           nameArray: ["l","u","i","g","i"],
+           length: 5,
+           image: "assets/images/luigi.jpg",
+           imageSilhouette: "assets/images/luigiSil.jpg",
+         }
+         var pikachu =
+         {
+           name: "pikachu",
+           nameArray: ["p","i","k","a","c","h","u"],
+           length: 7,
+           image: "assets/images/pikachu.jpg",
+           imageSilhouette: "assets/images/pikachuSil.jpg",
+         }
+
+         var samus =
+         {
+           name: "samus",
+           nameArray: ["s","a","m","u","s"],
+           length: 5,
+           image: "assets/images/samus.jpg",
+           imageSilhouette: "assets/images/samusSil.jpg",
+         }
+
+         var yoshi =
+         {
+           name: "yoshi",
+           nameArray: ["y","o","s","h","i"],
+           length: 5,
+           image: "assets/images/yoshi.jpg",
+           imageSilhouette: "assets/images/yoshiSil.jpg",
+         }
+     
      
          var peach =
          {
@@ -36,7 +79,24 @@
            image: "assets/images/mario.jpg",
            imageSilhouette: "assets/images/marioSil.jpg",
          }
-     
+         
+        var fox =
+        {
+          name: "fox",
+          nameArray: ["f","o","x"],
+          length: 3,
+          image: "assets/images/fox.jpg",
+          imageSilhouette: "assets/images/foxSil.jpg",
+        }
+
+        var ness =
+        {
+          name: "ness",
+          nameArray: ["n","e","s","s"],
+          length: 4,
+          image: "assets/images/ness.jpg",
+          imageSilhouette: "assets/images/nessSil.jpg",
+        }
      
     var score = 0;
     var questionIndex = 0;
@@ -45,8 +105,8 @@
     var playerGuesses = 0;
     var pauseGame = false;
 
-    var characterArray = [snake,peach,kirby,mario];
-    var character = Math.floor(Math.random() * 4);      // returns a random integer from 0 to 3
+    var characterArray = [snake,peach,kirby,mario,fox,ness,luigi,pikachu,samus,yoshi];
+    var character = Math.floor(Math.random() * 10);      // returns a random integer from 0 to 3
 
     document.getElementById("character").innerHTML = characterArray[character].name;
     document.getElementById("characterImage").src= characterArray[character].imageSilhouette;
@@ -58,7 +118,7 @@
     var guessArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
     var setArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
 
-
+        /*
       for (s=0; s<characterArray[character].length; s++)
       {
         g = document.createElement('p');
@@ -67,7 +127,7 @@
         g.innerHTML="-";
         document.getElementById("letters").appendChild(g); 
 
-      }
+      }*/
 
 
 
@@ -106,30 +166,32 @@
 
         function reset(){
 
-        
-  
-        guessArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
-        setArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
-        pos = 0;
-        character = Math.floor(Math.random() * 4);
-        document.getElementById("character").innerHTML = characterArray[character].name;
-        document.getElementById("characterImage").src= characterArray[character].imageSilhouette;
-        var temp = document.getElementById("letters");
+          playerGuesses = 0;
+          correct = 0;
 
-        for (i =0 ; i <guessArray.length; i++)
-          document.getElementById(guessArray[i]).innerHTML = "_";
+          guessArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
+          setArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
+          pos = 0;
+          character = Math.floor(Math.random() * 10);
+          document.getElementById("character").innerHTML = characterArray[character].name;
+          document.getElementById("characterImage").src= characterArray[character].imageSilhouette;
+          document.getElementById("status").innerHTML = "";
+          var temp = document.getElementById("letters");
 
-        while (temp.hasChildNodes()) {  
-          temp.removeChild(temp.firstChild);
+          for (i =0 ; i <guessArray.length; i++)
+            document.getElementById(guessArray[i]).innerHTML = "_";
+
+          while (temp.hasChildNodes()) {  
+            temp.removeChild(temp.firstChild);
       } 
         
-          
+      
       for (s=0; s<characterArray[character].length; s++)
       {
         g = document.createElement('p');
         g.setAttribute("id", answerArraySet[s]);
         g.setAttribute("style", "display: inline;"); 
-        g.innerHTML="-";
+        g.innerHTML="_ ";
         document.getElementById("letters").appendChild(g); 
 
       }
@@ -138,6 +200,7 @@
 
 
      
+      reset();
 
       function gameStart(userInput){
 
@@ -168,24 +231,24 @@
 
           if (checkWin(characterArray[character].length))
             {
-              console.log("WIN");
+              document.getElementById("status").innerHTML = "YOU WIN ! PRESS ANY KEY TO PLAY AGAIN"
               playerWins++;
               pauseGame = true;
               document.getElementById("characterImage").src= characterArray[character].image;
-              console.log("PRESS ANY KEY TO CONTINUE")
+              
               
             }
 
             if(playerGuesses==10)
             {
-              console.log("YOU LOSE");
-              playerGuesses = 0;
+              document.getElementById("status").innerHTML = "YOU LOSE ! PRESS ANY KEY TO PLAY AGAIN"
+              
               playerLosses++;
-              correct = 0;
-              reset();
+              
+              pauseGame = true;
             }
 
-        document.getElementById("guesses").innerHTML = playerGuesses;
+      
         document.getElementById("wins").innerHTML = playerWins;
         document.getElementById("losses").innerHTML = playerLosses;
 
