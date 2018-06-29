@@ -6,6 +6,7 @@
            name: "snake",
            nameArray: ["s","n","a","k","e"],
            length: 5,
+           image: "assets/images/snake.jpg",
          }
      
          var peach =
@@ -13,6 +14,7 @@
            name: "peach",
            nameArray: ["p","e","a","c","h"],
            length: 5,
+           image: 'assets/images/peach.jpg',
          }
      
          var kirby =
@@ -20,6 +22,7 @@
            name: "kirby",
            nameArray: ["k","i","r","b","y"],
            length: 5,
+           image: "assets/images/kirby.jpg",
          }
      
          var mario =
@@ -27,48 +30,28 @@
            name: "mario",
            nameArray: ["m","a","r","i","o"],
            length: 5,
+           image: "assets/images/mario.jpg",
          }
      
      
-     var score = 0;
-     var questionIndex = 0;
-  
-
-
-      var game = 
-      {
-          score: 0,
-          guesses: 10,
-
-          notCorrect: function() {
-            this.guesses--;
-            console.log("not correct");
-          },
-
-
-
-
-          
-
-    }
-
+    var score = 0;
+    var questionIndex = 0;
     var playerWins = 0;
     var playerLosses = 0;
+    var playerGuesses = 0;
 
-  
-      var characterArray = [snake,peach,kirby,mario];
-      var character = Math.floor(Math.random() * 4);      // returns a random integer from 0 to 3
+    var characterArray = [snake,peach,kirby,mario];
+    var character = Math.floor(Math.random() * 4);      // returns a random integer from 0 to 3
 
-      document.getElementById("character").innerHTML = characterArray[character].name;
+    document.getElementById("character").innerHTML = characterArray[character].name;
+    document.getElementById("characterImage").src= characterArray[character].image;
+    //document.getElementById("characterImage").innerHTML =
 
-
-     
-      
-
-
-      var pos = 0;
-
-      var answerArraySet = ["answer1", "answer2","answer3","answer4","answer5"];
+    var pos = 0;
+    var answerArraySet = ["answer1", "answer2","answer3","answer4","answer5","answer6", "answer7","answer8","answer9","answer10"];
+         
+    var guessArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
+    var setArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
 
 
       for (s=0; s<characterArray[character].length; s++)
@@ -77,16 +60,14 @@
         g.setAttribute("id", answerArraySet[s]);
         g.setAttribute("style", "display: inline;"); 
         g.innerHTML="-";
-        document.getElementById("guesses").appendChild(g); 
+        document.getElementById("letters").appendChild(g); 
 
       }
 
 
-      var guessArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
-      var setArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
 
       var correct = 0;
-      var guesses = 0;
+
 
       function checkDuplicate(userInput) {
 
@@ -109,9 +90,14 @@
       function checkWin(temp){
 
         if(temp == correct)
+        {
+          correct = 0;
+          playerGuesses = 0;
           return true;
-        
+        }
       }
+
+
 
         function reset(){
 
@@ -122,8 +108,8 @@
         pos = 0;
         character = Math.floor(Math.random() * 4);
         document.getElementById("character").innerHTML = characterArray[character].name;
-
-        var temp = document.getElementById("guesses");
+        document.getElementById("characterImage").src= characterArray[character].image;
+        var temp = document.getElementById("letters");
 
         for (i =0 ; i <guessArray.length; i++)
           document.getElementById(guessArray[i]).innerHTML = "_";
@@ -139,7 +125,7 @@
         g.setAttribute("id", answerArraySet[s]);
         g.setAttribute("style", "display: inline;"); 
         g.innerHTML="-";
-        document.getElementById("guesses").appendChild(g); 
+        document.getElementById("letters").appendChild(g); 
 
       }
 
@@ -148,13 +134,9 @@
 
      
 
+      function gameStart(userInput){
+
       
-      document.onkeyup = function(event) {
-        
-
-        // Determine which key was pressed, make it lowercase, and set it to the userInput variable.
-
-        var userInput = event.key.toLowerCase();
         setArray[pos] = userInput;
 
         if(checkDuplicate(userInput))
@@ -175,6 +157,7 @@
               correct++;
             }
           }
+          playerGuesses++;
           pos++;
 
 
@@ -186,11 +169,33 @@
               
             }
 
+            if(playerGuesses==10)
+            {
+              console.log("YOU LOSE");
+              playerGuesses = 0;
+              playerLosses++;
+              reset();
+            }
 
+        document.getElementById("guesses").innerHTML = playerGuesses;
         document.getElementById("wins").innerHTML = playerWins;
         document.getElementById("losses").innerHTML = playerLosses;
 
       
         }
   
+      }
+
+      document.onkeyup = function(event) {
+        // Determine which key was pressed, make it lowercase, and set it to the userInput variable.
+
+        var userInput = event.key.toLowerCase();
+        console.log("PRESS");
+        gameStart(userInput);
+
       };
+
+    
+   
+
+   
