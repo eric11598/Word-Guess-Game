@@ -43,6 +43,7 @@
     var playerWins = 0;
     var playerLosses = 0;
     var playerGuesses = 0;
+    var pauseGame = false;
 
     var characterArray = [snake,peach,kirby,mario];
     var character = Math.floor(Math.random() * 4);      // returns a random integer from 0 to 3
@@ -106,7 +107,7 @@
         function reset(){
 
         
-        console.log("RESET");
+  
         guessArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
         setArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
         pos = 0;
@@ -169,7 +170,9 @@
             {
               console.log("WIN");
               playerWins++;
-              reset();
+              pauseGame = true;
+              document.getElementById("characterImage").src= characterArray[character].image;
+              console.log("PRESS ANY KEY TO CONTINUE")
               
             }
 
@@ -178,6 +181,7 @@
               console.log("YOU LOSE");
               playerGuesses = 0;
               playerLosses++;
+              correct = 0;
               reset();
             }
 
@@ -191,11 +195,18 @@
       }
 
       document.onkeyup = function(event) {
-        // Determine which key was pressed, make it lowercase, and set it to the userInput variable.
-
-        var userInput = event.key.toLowerCase();
-        console.log("PRESS");
-        gameStart(userInput);
+        
+        if(pauseGame)
+        {
+          console.log(pauseGame);
+          pauseGame = false;
+          reset();
+        }
+        else
+        {
+          var userInput = event.key.toLowerCase();
+          gameStart(userInput);
+        }
 
       };
 
