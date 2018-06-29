@@ -7,6 +7,7 @@
            nameArray: ["s","n","a","k","e"],
            length: 5,
            image: "assets/images/snake.jpg",
+           imageSilhouette: "assets/images/snakeSil.jpg",
          }
      
          var peach =
@@ -15,6 +16,7 @@
            nameArray: ["p","e","a","c","h"],
            length: 5,
            image: 'assets/images/peach.jpg',
+           imageSilhouette: "assets/images/peachSil.jpg",
          }
      
          var kirby =
@@ -23,6 +25,7 @@
            nameArray: ["k","i","r","b","y"],
            length: 5,
            image: "assets/images/kirby.jpg",
+           imageSilhouette: "assets/images/kirbySil.jpg",
          }
      
          var mario =
@@ -31,6 +34,7 @@
            nameArray: ["m","a","r","i","o"],
            length: 5,
            image: "assets/images/mario.jpg",
+           imageSilhouette: "assets/images/marioSil.jpg",
          }
      
      
@@ -44,8 +48,8 @@
     var character = Math.floor(Math.random() * 4);      // returns a random integer from 0 to 3
 
     document.getElementById("character").innerHTML = characterArray[character].name;
-    document.getElementById("characterImage").src= characterArray[character].image;
-    //document.getElementById("characterImage").innerHTML =
+    document.getElementById("characterImage").src= characterArray[character].imageSilhouette;
+    
 
     var pos = 0;
     var answerArraySet = ["answer1", "answer2","answer3","answer4","answer5","answer6", "answer7","answer8","answer9","answer10"];
@@ -108,7 +112,7 @@
         pos = 0;
         character = Math.floor(Math.random() * 4);
         document.getElementById("character").innerHTML = characterArray[character].name;
-        document.getElementById("characterImage").src= characterArray[character].image;
+        document.getElementById("characterImage").src= characterArray[character].imageSilhouette;
         var temp = document.getElementById("letters");
 
         for (i =0 ; i <guessArray.length; i++)
