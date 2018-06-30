@@ -11,22 +11,22 @@
 <body>
 
     <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <img src="assets/images/logo@0,25x.png" class="img-fluid" alt="Responsive image" style="display: block; margin-left: auto; margin-right: auto">
-          <h1 class="display-4" style = "text-align:center">Character Guessing Game</h1>
-        </div>
+      <div class="container">
+        <img src="assets/images/logo@0,25x.png" class="img-fluid" alt="Responsive image" style="display: block; margin-left: auto; margin-right: auto">
+        <h1 class="display-4" style = "text-align:center">Character Guessing Game</h1>
+        <button type="button" onclick="musicControl()" class="btn btn-primary"style="display: block; margin-left: auto; margin-right: auto">Play/Pause Music</button>
       </div>
+    </div>
 
-  <div class="container">
-      <div class="row">
-          <div class="col-md-5">
-                  <img id = "characterImage">
-                  </img>
-
-          </div>
-          <div class="col-md-7">
-           <h3> Letters Guessed: </h3>
-          
+  <div class="container" id = "main">
+    <div class="row">
+      <div class="col-md-5">
+        <img id = "characterImage">
+        </img>
+      </div>
+      
+      <div class="col-md-7">
+        <h3> Letters Guessed: </h3>    
                 <div id="guess1">_</div>
                 <div id="guess2">_</div>
                 <div id="guess3">_</div>
@@ -54,11 +54,14 @@
                   <div id = "losses">
                       -
                   </div>
+
+                  <hr>
+                  
                     <h4>Status</h4>
                   <div id = "status">
                   </div>
 
-                    <hr>
+                    
                   </div>
                   <hr>
                   <div class="col-md-12">
@@ -68,11 +71,6 @@
           </div>
         </div>
       </div>
-
- 
-
-
-
   </div>
 
   
