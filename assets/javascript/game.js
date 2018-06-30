@@ -8,6 +8,7 @@
            length: 5,
            image: "assets/images/snake.jpg",
            imageSilhouette: "assets/images/snakeSil.jpg",
+           announcerSound: "assets/sounds/snd_se_narration_characall_Snake.wav",
          }
          var link =
          {
@@ -16,6 +17,7 @@
            length: 4,
            image: "assets/images/link.jpg",
            imageSilhouette: "assets/images/linkSil.jpg",
+           announcerSound: "assets/sounds/snd_se_narration_characall_Link.wav",
          }
          var luigi =
          {
@@ -24,6 +26,7 @@
            length: 5,
            image: "assets/images/luigi.jpg",
            imageSilhouette: "assets/images/luigiSil.jpg",
+           announcerSound: "assets/sounds/snd_se_narration_characall_Luigi.wav",
          }
          var pikachu =
          {
@@ -32,6 +35,7 @@
            length: 7,
            image: "assets/images/pikachu.jpg",
            imageSilhouette: "assets/images/pikachuSil.jpg",
+           announcerSound: "assets/sounds/snd_se_narration_characall_Pikachu.wav",
          }
 
          var samus =
@@ -41,6 +45,7 @@
            length: 5,
            image: "assets/images/samus.jpg",
            imageSilhouette: "assets/images/samusSil.jpg",
+           announcerSound: "assets/sounds/snd_se_narration_characall_Samus.wav",
          }
 
          var yoshi =
@@ -50,6 +55,7 @@
            length: 5,
            image: "assets/images/yoshi.jpg",
            imageSilhouette: "assets/images/yoshiSil.jpg",
+           announcerSound: "assets/sounds/snd_se_narration_characall_Yoshi.wav",
          }
      
      
@@ -60,6 +66,7 @@
            length: 5,
            image: 'assets/images/peach.jpg',
            imageSilhouette: "assets/images/peachSil.jpg",
+           announcerSound: "assets/sounds/snd_se_narration_characall_Peach.wav",
          }
      
          var kirby =
@@ -69,6 +76,7 @@
            length: 5,
            image: "assets/images/kirby.jpg",
            imageSilhouette: "assets/images/kirbySil.jpg",
+           announcerSound: "assets/sounds/snd_se_narration_characall_Kirby.wav",
          }
      
          var mario =
@@ -78,6 +86,7 @@
            length: 5,
            image: "assets/images/mario.jpg",
            imageSilhouette: "assets/images/marioSil.jpg",
+           announcerSound: "assets/sounds/snd_se_narration_characall_Mario.wav",
          }
          
         var fox =
@@ -87,6 +96,7 @@
           length: 3,
           image: "assets/images/fox.jpg",
           imageSilhouette: "assets/images/foxSil.jpg",
+          announcerSound: "assets/sounds/snd_se_narration_characall_Fox.wav",
         }
 
         var ness =
@@ -96,6 +106,7 @@
           length: 4,
           image: "assets/images/ness.jpg",
           imageSilhouette: "assets/images/nessSil.jpg",
+          announcerSound: "assets/sounds/snd_se_narration_characall_Ness.wav",
         }
      
     var score = 0;
@@ -108,7 +119,7 @@
     var characterArray = [snake,peach,kirby,mario,fox,ness,luigi,pikachu,samus,yoshi];
     var character = Math.floor(Math.random() * 10);      // returns a random integer from 0 to 3
 
-    document.getElementById("character").innerHTML = characterArray[character].name;
+    
     document.getElementById("characterImage").src= characterArray[character].imageSilhouette;
     
 
@@ -117,18 +128,6 @@
          
     var guessArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
     var setArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
-
-        /*
-      for (s=0; s<characterArray[character].length; s++)
-      {
-        g = document.createElement('p');
-        g.setAttribute("id", answerArraySet[s]);
-        g.setAttribute("style", "display: inline;"); 
-        g.innerHTML="-";
-        document.getElementById("letters").appendChild(g); 
-
-      }*/
-
 
 
       var correct = 0;
@@ -173,7 +172,7 @@
           setArray = ["guess1", "guess2","guess3","guess4","guess5","guess6", "guess7","guess8","guess9","guess10"];
           pos = 0;
           character = Math.floor(Math.random() * 10);
-          document.getElementById("character").innerHTML = characterArray[character].name;
+         
           document.getElementById("characterImage").src= characterArray[character].imageSilhouette;
           document.getElementById("status").innerHTML = "";
           var temp = document.getElementById("letters");
@@ -235,7 +234,10 @@
               playerWins++;
               pauseGame = true;
               document.getElementById("characterImage").src= characterArray[character].image;
-              
+              console.log(characterArray[character].announcerSound);
+
+              var audio = new Audio(characterArray[character].announcerSound);
+              audio.play();
               
             }
 
@@ -257,7 +259,16 @@
   
       }
 
+      var value = 33;
+        function myFunction(){
+          var value = 66;
+        }
+
+
       document.onkeyup = function(event) {
+
+        myFunction();
+        console.log(value);
         
         if(pauseGame)
         {
