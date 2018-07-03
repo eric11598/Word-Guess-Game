@@ -111,7 +111,7 @@
 
 //MUSIC CONTROL
 
-var music = new Audio("assets/sounds/theme_extended.mp3");
+var music = new Audio("assets/sounds/Theme_Extended.mp3");
 var musicPlaying = true;
 music.play();
 
